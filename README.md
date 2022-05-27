@@ -48,16 +48,79 @@ Running from Mac and using python and R
     
 * **3.Code**
       
-      *코드 업로드 예정*
+      *코드 업로드 예정(수정중)*
       
       #2022/05/20 yjseo
       # 01.make input data : LIN28A binding motif sequence 
       ...
       
       # 02.build LIN28A binding motif predictor 
-      ...
+      library 불러오기
+      library(readr)
+      library(dplyr)
+      library(caret)
+      library(randomForest)
+      library(ComplexHeatmap)
+      library(ROCR)
       
       
+      # 함수
+      # AUC & ROC 그리는 함수
+      plot.roc.curve <- function(model, data, actual, title.text){
+      predict_prob <- predict(model, newdata = data,type = 'prob')
+      predictions <- prediction(predict_prob[,2], actual)
+  
+      perf <- performance(predictions, "tpr", "fpr")
+      plot(perf,col="black",lty=1, lwd=2,
+       main=title.text, cex.main=0.6, cex.lab=0.8,xaxs="i", yaxs="i")
+       abline(0,1, col="red")
+       auc <- performance(predictions,"auc")
+       auc <- unlist(slot(auc, "y.values"))
+       #auc <- round(auc,2)
+      legend(0.4,0.4,legend=c(paste0("AUC: ",auc)),cex=0.6,bty = "n",box.col = "white")
+      }
+
+
+      data <- read.csv(*생성 예정*)
+      data$state <- as.factor(data$state)
+
+      data.train <- data %>% filter(*훈련 데이터셋 index지정해서 추출 할 예정*) %>% select(-index)
+      data.test <- data %>% filter(*테스트 데이터셋 index지정해서 추출 할 예정*) %>% select(-index) 
+
+      
+      #데이터 준비
+      data.train_extract <- data.train %>% select(-sample)
+      data.test_extract <- data.test %>% select(-sample) 
+
+      # randomforest model 학습
+      data.train_extract <- data.train_extract[sample(NROW(data.train_extract), NROW(data.train_extract)),]
+      rf.fit = randomForest(state ~ .
+                      , data=data.train_extract, mtry = floor(sqrt(500)), ntree = 500, importance = T)
+
+      # 결과 확인
+      # train data 결과
+      confusionMatrix(
+        predict(rf.fit, newdata = data.train_extract),
+        data.train_extract$state
+      )
+
+      
+      plot.roc.curve( model = rf.fit, 
+                data = data.train_extract,
+                actual = data.train_extract$state, 
+                title.text = "Train data ROC Curve")
+
+      # test data 결과
+      confusionMatrix(
+        predict(rf.fit, newdata = data.test_extract ),
+        data.test_extract$state
+      )
+
+      plot.roc.curve( model = rf.fit, 
+                data = data.test_extract,
+                actual = data.test_extract$state, 
+                title.text = "Test data ROC Curve")
+
 
 
 **< Results>** 
