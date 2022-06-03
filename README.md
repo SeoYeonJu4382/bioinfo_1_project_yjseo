@@ -22,7 +22,7 @@ Running from Mac and using python and R
   ![스크린샷 2022-05-27 오후 3 05 38](https://user-images.githubusercontent.com/64352388/170640313-999877d4-cfd0-4344-8e84-71c889907be4.png) 
   
      - (1) LIN28A-bound sequence 얻기 
-     - (2) Input 값 데이터로 정제 후 추출 --> python 사용예정 
+     - (2) Input 값 데이터로 정제 후 추출
 
 
 
@@ -47,12 +47,19 @@ Running from Mac and using python and R
     
     
 * **3.Code**
+* - python input 데이터 전처리 만들기 코드 : **Final_Free_Proj_2022_24764.ipynb** 업로드 함 (2022.06.03 updated) 
+* - R code 
       
-      *코드 업로드 예정(수정중)*
+      *코드 업로드(수정중)*
+     
       
       #2022/05/20 yjseo
       # 01.make input data : LIN28A binding motif sequence 
-      ...
+       -   - **Final_Free_Proj_2022_24764.ipynb** 업로드 함
+     - <img width="936" alt="스크린샷 2022-06-03 오후 10 35 38" src="https://user-images.githubusercontent.com/64352388/171864863-cb7fe18c-65b0-4895-8e53-8919697b59c3.png">
+     - <img width="898" alt="스크린샷 2022-06-03 오후 10 35 56" src="https://user-images.githubusercontent.com/64352388/171864951-3a3ed185-c919-4631-a96a-8560bc35cdfd.png">
+
+
       
       # 02.build LIN28A binding motif predictor 
       library 불러오기
