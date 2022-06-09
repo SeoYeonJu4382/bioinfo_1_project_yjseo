@@ -96,7 +96,7 @@ Running from Mac and using python and R
           sequence = paste(data)
           df <- data.frame(seq_name, sequence)
 
-          pre_data = readDNAStringSet("/home/yjseo/bioinfo_1_project_yjseo/final_free_prj_data/chr1.fa.out") #41357
+          pre_data = readDNAStringSet("/home/yjseo/bioinfo_1_project_yjseo/final_free_prj_data/chr1.fa.out") #2588358
 
 
           null_data = read.table("/home/yjseo/bioinfo_1_project_yjseo/final_free_prj_data/null3_seq.txt")
